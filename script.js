@@ -1,6 +1,6 @@
 const form = document.getElementById('probability-form');
 const resultDiv = document.getElementById('result');
-
+let myChart;
 form.addEventListener('input', function () {
   const Dados = parseInt(document.getElementById('num_Dados').value);
   const Cantidad = parseInt(document.getElementById('num_Palo').value);
@@ -24,11 +24,7 @@ if (Valor !== 1) {
         Probability += ProbabilityHold;
     }
 }
-
-
 Probability *= 100;
-
-
 resultDiv.textContent = `La probabilidad de que al menos ${Cantidad} '${Valor}'s aparezca en ${Dados} es de: ${Probability.toFixed(2)}%`;
 let Probabilities = []
 if (Valor !== 1) {
@@ -65,30 +61,31 @@ function factorial(n) {
 }
 
 let labels = Array.from({ length: Dados }, (_, i) => (i + 1).toString());
-
-let data = Probabilities;
-let ctx = document. getElementById("myChart");
-
-new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: labels,
+const data = {
+    labels: labels,
         datasets: [{
             label: "% de al menos numero de dados",
-            data: data,
+            data: Probabilities,
             borderWidth: 1
         }]
-    },
+}
+const config = {
+    type: 'line',
+    data,
     options: {
         scales: {
             y: {
                 beginAtZero: true
-                
             }
         }
     }
-})
-
+};
+if(myChart){
+    myChart.destroy();
+}
+ myChart = new Chart(
+    document.getElementById("myChart"),
+    config
+);
 });
-
 form.dispatchEvent(new Event('input'));
