@@ -34,7 +34,6 @@ body {
     padding: 0.5rem;
   }
   
-  
   #result {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: rgb(230, 230, 230);
@@ -42,4 +41,3 @@ body {
     font-weight: bold;
     text-align: center;
   }
-  
