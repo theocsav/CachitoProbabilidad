@@ -25,7 +25,7 @@ if (Valor !== 1) {
     }
 }
 Probability *= 100;
-resultDiv.textContent = `La probabilidad de que al menos ${Cantidad} '${Valor}'s aparezca en ${Dados} es de: ${Probability.toFixed(2)}%`;
+resultDiv.textContent = `La probabilidad de que al menos ${Cantidad} '${Valor}'s aparezca en ${Dados} tiros de dado es de: ${Probability.toFixed(2)}%`;
 let Probabilities = []
 if (Valor !== 1) {
     for(let numero = 1; numero <= Dados; numero++){
