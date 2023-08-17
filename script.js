@@ -7,7 +7,16 @@ form.addEventListener('input', function () {
   const Valor = parseInt(document.getElementById('val_Palo').value);
 
   if (isNaN(Dados) || isNaN(Cantidad) || isNaN(Valor)) {
-    resultDiv.textContent = 'Please enter valid numbers.';
+    resultDiv.textContent = 'Seleccione numeros validos';
+    return;
+  }
+  if(Cantidad > Dados){
+    resultDiv.textContent = 'Cantidad no puede ser mayor al numero de dados';
+    return;
+  }
+
+  if(Valor >= 7 || Valor <= 0){
+    resultDiv.textContent = 'Valor tiene que ser entre 1-6';
     return;
   }
   
@@ -24,8 +33,12 @@ if (Valor !== 1) {
         Probability += ProbabilityHold;
     }
 }
+
+
 Probability *= 100;
-resultDiv.textContent = `La probabilidad de que al menos ${Cantidad} '${Valor}'s aparezca en ${Dados} tiros de dado es de: ${Probability.toFixed(2)}%`;
+
+
+resultDiv.textContent = `La probabilidad de que al menos ${Cantidad} '${Valor}'s aparezca en ${Dados} es de: ${Probability.toFixed(2)}%`;
 let Probabilities = []
 if (Valor !== 1) {
     for(let numero = 1; numero <= Dados; numero++){
@@ -61,6 +74,8 @@ function factorial(n) {
 }
 
 let labels = Array.from({ length: Dados }, (_, i) => (i + 1).toString());
+
+//setup block
 const data = {
     labels: labels,
         datasets: [{
@@ -69,6 +84,7 @@ const data = {
             borderWidth: 1
         }]
 }
+//config block
 const config = {
     type: 'line',
     data,
@@ -80,6 +96,7 @@ const config = {
         }
     }
 };
+//init block (render)
 if(myChart){
     myChart.destroy();
 }
@@ -87,5 +104,7 @@ if(myChart){
     document.getElementById("myChart"),
     config
 );
+
 });
+
 form.dispatchEvent(new Event('input'));
